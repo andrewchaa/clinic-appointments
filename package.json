@@ -7,17 +7,14 @@
   },
   "dependencies": {
     "express": "^4.13.4",
-    "jade": "^1.11.0",
-    "webpack": "^1.12.13",
     "react": "^15.2.1",
+    "react-datepicker": "^0.29.0",
     "react-dom": "^15.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "bundle": "webpack --config webpack.config.js",
-    "prestart": "npm run bundle",
     "deploy": "gcloud app deploy"
   },
   "eslintConfig": {

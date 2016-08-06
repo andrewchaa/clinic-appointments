@@ -5,15 +5,25 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <form className="form-inline">
+        <div className="row">
+          <div className="col-md-2">
+            <input type="text" className="form-control" id="name" placeholder="name" />
+          </div>
+          <div className="col-md-2">
+            <input type="number" className="form-control" id="mobile" placeholder="mobile" />
+          </div>
+          <div className="col-md-2">
+            <select className="form-control" id="clinic" name="clinic">
+              <option>Equilibrium</option>
+              <option>Harley Street</option>
+            </select>
+          </div>
+          <div className="col-md-2">
+            <button type="submit" className="btn btn-default">Submit</button>
+          </div>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </form>
     );
   }
 }
