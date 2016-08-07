@@ -1,31 +1,34 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
+import AppointmentForm from './AppointmentForm';
+
+var onSubmit = (values, dispatch) => {
+
+};
 
 class App extends Component {
   render() {
+
     return (
-      <form className="form-inline">
-        <div className="row">
-          <div className="col-md-2">
-            <input type="text" className="form-control" id="name" placeholder="name" />
-          </div>
-          <div className="col-md-2">
-            <input type="number" className="form-control" id="mobile" placeholder="mobile" />
-          </div>
-          <div className="col-md-2">
-            <select className="form-control" id="clinic" name="clinic">
-              <option>Equilibrium</option>
-              <option>Harley Street</option>
-            </select>
-          </div>
-          <div className="col-md-2">
-            <button type="submit" className="btn btn-default">Submit</button>
-          </div>
-        </div>
-      </form>
+      <div>
+        <AppointmentForm {...this.props} />
+      </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    appointmentDate: state.appointmentDate
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+  }
+}
+
+
+App = connect(mapStateToProps, mapDispatchToProps) (App);
 
 export default App;
