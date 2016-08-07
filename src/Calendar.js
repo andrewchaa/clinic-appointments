@@ -1,31 +1,16 @@
 import React from 'react';
-var DatePicker = require('react-datepicker');
-var moment = require('moment');
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
 
-require('react-datepicker/dist/react-datepicker.css');
+import 'react-datepicker/dist/react-datepicker.css';
 
-var Example = React.createClass({
-  displayName: 'Appointment Date',
-
-  getInitialState: function() {
-    return {
-      appointmentDate: moment()
-    };
-  },
-
-  handleChange: function(date) {
-    this.setState({
-      appointmentDate: date
-    });
-  },
-
-  render: function() {
-
-    return <DatePicker className="form-control"
-        dateFormat="DD/MM/YYYY"
-        selected={this.state.appointmentDate}
-        onChange={this.handleChange} />;
-  }
-});
+const Example = props => {
+  const selected = props.value ? moment(props.value) : null;
+  return (
+    <DatePicker {...timespan.date}
+      selected={timespan.date.value ? moment(timespan.date.value, 'MM/DD/YY') : null }
+      onChange={param => timespan.date.onChange(param)} />
+    );
+}
 
 export default Example;

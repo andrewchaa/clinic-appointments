@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { reduxForm } from 'redux-form';
-import Calendar from './Calendar.js'
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
 
 var onSubmit = (values, dispatch) => {
 
@@ -20,7 +22,10 @@ class AppointmentForm extends Component {
             <option>Equilibrium</option>
             <option>Harley Street</option>
           </select>
-          <Calendar id="appointmentDate" name="appointmentDate" {...this.props} />
+          <DatePicker {...appointmentDate}
+            dateFormat='DD/MM/YYYY'
+            selected={appointmentDate.value ? moment(appointmentDate.value) : null }
+            className="form-control" />
           <input type="text" className="form-control" id="appointmentTime" name="appointmentTime" {...appointmentTime} />
           <button type="submit" className="btn btn-default">Submit</button>
         </div>
