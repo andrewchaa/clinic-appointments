@@ -1,11 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 import { reduxForm } from 'redux-form';
-import 'react-datepicker/dist/react-datepicker.css';
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
+import 'bootstrap-datepicker'
+
+const fields = [ 'patientName', 'mobile', 'clinic', 'appointmentDate', 'appointmentTime' ];
 
 var onSubmit = (values, dispatch) => {
-
+  console.log(values);
 };
 
 class AppointmentForm extends Component {
@@ -19,13 +19,11 @@ class AppointmentForm extends Component {
           <input type="text" className="form-control" id="patientName" name="patientName" placeholder="name" {...patientName} />
           <input type="text" className="form-control" id="mobile" placeholder="mobile" {...mobile} />
           <select className="form-control" id="clinic" name="clinic" {...clinic}>
+            value={clinic.value || ''}>
             <option>Equilibrium</option>
             <option>Harley Street</option>
           </select>
-          <DatePicker {...appointmentDate}
-            dateFormat='DD/MM/YYYY'
-            selected={appointmentDate.value ? moment(appointmentDate.value) : null }
-            className="form-control" />
+          <input type="text" className="form-control" id="appointmentDate" name="appointmentDate" {...appointmentDate} />
           <input type="text" className="form-control" id="appointmentTime" name="appointmentTime" {...appointmentTime} />
           <button type="submit" className="btn btn-default">Submit</button>
         </div>
@@ -36,5 +34,7 @@ class AppointmentForm extends Component {
 
 export default reduxForm({
     form: 'AppointmentForm',
-    fields: [ 'patientName', 'mobile', 'clinic', 'appointmentDate', 'appointmentTime' ]
-})(AppointmentForm);
+    fields
+  },
+  state => ({ initialValues: { clinic: 'Equilibrium' } })
+)(AppointmentForm);
