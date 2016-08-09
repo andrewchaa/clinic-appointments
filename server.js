@@ -5,10 +5,10 @@ var path = require('path');
 
 var app = express();
 
-app.use(express.static(path.resolve(path.join(__dirname, '/build'))));
+app.use(express.static(path.resolve(path.join(__dirname, '/app'))));
 
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname + '/build/index.html'));
+  res.sendFile(path.join(__dirname + '/app/index.html'));
 });
 
 var server = app.listen(process.env.PORT || 8080, function () {
