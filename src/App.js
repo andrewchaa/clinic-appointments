@@ -14,7 +14,8 @@ class App extends Component {
     return (
       <div>
         <AppointmentForm {...this.props} />
-        <SplashPage {...this.props} />
+        { !this.props.userId && <SplashPage {...this.props} />}
+
       </div>
     );
   }
