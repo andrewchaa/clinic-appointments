@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import AppointmentForm from './AppointmentForm';
 import SplashPage from './SplashPage';
+import SignIn from './signin';
 
 class App extends Component {
 
@@ -13,6 +14,7 @@ class App extends Component {
 
     return (
       <div>
+        <SignIn />
         <AppointmentForm {...this.props} />
         { !this.props.userId && <SplashPage {...this.props} />}
 

@@ -20,7 +20,6 @@ let store = createStore(rootReducer, {},
   compose(applyMiddleware(loggerMiddleware), window.devToolsExtension ? window.devToolsExtension() : f => f)
 )
 
-
 ReactDOM.render(
   <Provider store={store}>
     <App />
