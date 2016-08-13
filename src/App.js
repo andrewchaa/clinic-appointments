@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import AppointmentForm from './AppointmentForm';
-import SplashPage from './SplashPage';
 import SignIn from './signin';
 
 class App extends Component {
@@ -14,9 +13,8 @@ class App extends Component {
 
     return (
       <div>
-        <SignIn />
+        <SignIn {...this.props} />
         <AppointmentForm {...this.props} />
-        { !this.props.userId && <SplashPage {...this.props} />}
 
       </div>
     );
@@ -31,12 +29,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = function(dispatch) {
   return {
-    handleClick() {
+    signIn() {
       var provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider);
     },
+    signOut() {
+      firebase.auth().signOut();
+      dispatch({
+        type: 'User_Id_Changed',
+        userId: ''
+      })
+    },
     onAuthStateChanged: (user) => {
-      console.log(user);
       dispatch({
         type: 'User_Id_Changed',
         userId: user.uid

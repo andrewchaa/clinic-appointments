@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import { reduxForm } from 'redux-form';
-import 'bootstrap-datepicker'
 
 const fields = [ 'patientName', 'mobile', 'clinic', 'appointmentDate', 'appointmentTime' ];
 
