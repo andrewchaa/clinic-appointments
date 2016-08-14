@@ -2,10 +2,29 @@ import React, { PropTypes, Component } from 'react';
 import { reduxForm } from 'redux-form';
 import 'bootstrap-datepicker'
 
-const fields = [ 'name  ', 'mobile', 'clinic', 'date', 'time' ];
+const fields = [ 'name', 'mobile', 'clinic', 'date', 'time' ];
 
-var add = (values, dispatch) => {
+const add = (values, dispatch) => {
   console.log(values);
+
+  const uid = this.props.userId;
+  var appointment = {
+     name: values.name,
+     mobile: values.mobile,
+     clinic: values.clinic,
+     date: values.date,
+     time: values.time
+  };
+
+   // Get a key for a new Post.
+   var newKey = firebase.database().ref().child('appointments').push().key;
+
+   // Write the new post's data simultaneously in the posts list and the user's post list.
+   var updates = {};
+   updates['/appointments/' + newKey] = appointment;
+   updates['/user-appointments/' + uid + '/' + newKey] = appointment;
+
+   return firebase.database().ref().update(updates);
 
 };
 
