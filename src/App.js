@@ -13,7 +13,7 @@ class App extends Component {
 
     return (
       <div>
-        <SignIn {...this.props} />
+        <SignIn {...this.props} /><br />
         <AppointmentForm {...this.props} />
 
       </div>
@@ -45,9 +45,6 @@ const mapDispatchToProps = function(dispatch) {
         type: 'User_Id_Changed',
         userId: user.uid
       });
-    },
-    testFunction: function() {
-      console.log('test');
     }
   }
 }

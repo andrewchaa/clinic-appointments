@@ -1,34 +1,60 @@
 import React, { PropTypes, Component } from 'react';
 import { reduxForm } from 'redux-form';
+import 'bootstrap-datepicker'
 
-const fields = [ 'patientName', 'mobile', 'clinic', 'appointmentDate', 'appointmentTime' ];
+const fields = [ 'name  ', 'mobile', 'clinic', 'date', 'time' ];
 
-var onSubmit = (values, dispatch) => {
+var add = (values, dispatch) => {
   console.log(values);
+
 };
 
 class AppointmentForm extends Component {
   render() {
 
-    const {fields: { patientName, mobile, clinic, appointmentDate, appointmentTime }, handleSubmit, submitting } = this.props;
+    const {fields: { name, mobile, clinic, date, time }, handleSubmit, submitting } = this.props;
 
     return (
-      <form className="form-inline" onSubmit={handleSubmit(onSubmit)}>
-        <div className="row">
-          <input type="text" className="form-control" id="patientName" name="patientName" placeholder="name" {...patientName} />
+      <form onSubmit={handleSubmit(add)}>
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
+          <input type="text" className="form-control" id="name" placeholder="name" {...name} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="mobile">Mobile</label>
           <input type="text" className="form-control" id="mobile" placeholder="mobile" {...mobile} />
-          <select className="form-control" id="clinic" name="clinic" {...clinic}>
+        </div>
+        <div className="form-group">
+          <label htmlFor="clinic">Clinic</label>
+          <select className="form-control" id="clinic" {...clinic}>
             value={clinic.value || ''}>
             <option>Equilibrium</option>
             <option>Harley Street</option>
           </select>
-          <input type="text" className="form-control" id="appointmentDate" name="appointmentDate" {...appointmentDate} />
-          <input type="text" className="form-control" id="appointmentTime" name="appointmentTime" {...appointmentTime} />
-          <button type="submit" className="btn btn-default">Submit</button>
         </div>
+        <div className="form-group">
+          <label htmlFor="date">Date</label>
+          <input type="text" className="form-control" id="date" name="date" {...date} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="time">Time</label>
+          <input type="text" className="form-control" id="time" name="time" {...time} />
+        </div>
+
+        <button type="submit" disabled={submitting} className="btn btn-default">
+          {submitting ? <i className="glyphicon glyphicon-refresh" /> : <i />}
+          Submit
+        </button>
       </form>
     );
   }
+}
+
+AppointmentForm.propTypes = {
+  fields: PropTypes.object.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  resetForm: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired
 }
 
 export default reduxForm({
