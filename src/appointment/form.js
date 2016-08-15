@@ -27,7 +27,7 @@ const add = (values, dispatch) => {
 
 };
 
-class AppointmentForm extends Component {
+class EntryForm extends Component {
   render() {
 
     const {fields: { name, mobile, clinic, date, time, userId }, handleSubmit, submitting } = this.props;
@@ -69,7 +69,7 @@ class AppointmentForm extends Component {
   }
 }
 
-AppointmentForm.propTypes = {
+EntryForm.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,
@@ -77,7 +77,7 @@ AppointmentForm.propTypes = {
 }
 
 export default reduxForm({
-    form: 'AppointmentForm',
+    form: 'EntryForm',
     fields
   },
   state => ({ // mapStateToProps
@@ -86,4 +86,4 @@ export default reduxForm({
       userId: state.userId
     }
   })
-)(AppointmentForm);
+)(EntryForm);

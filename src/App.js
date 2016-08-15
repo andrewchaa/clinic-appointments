@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import AppointmentForm from './AppointmentForm';
+import EntryForm from './appointment/form';
 import SignIn from './signin';
 
 class App extends Component {
@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <div>
         <SignIn {...this.props} /><br />
-        <AppointmentForm {...this.props} />
+        <EntryForm {...this.props} />
 
       </div>
     );
