@@ -1,19 +1,18 @@
 import React, { PropTypes, Component } from 'react';
 import { reduxForm } from 'redux-form';
-import 'bootstrap-datepicker'
 
-const fields = [ 'name', 'mobile', 'clinic', 'date', 'time' ];
+const fields = [ 'name', 'mobile', 'clinic', 'date', 'time', 'userId' ];
 
 const add = (values, dispatch) => {
   console.log(values);
 
-  const uid = this.props.userId;
   var appointment = {
      name: values.name,
      mobile: values.mobile,
      clinic: values.clinic,
      date: values.date,
-     time: values.time
+     time: values.time,
+     userId: values.userId
   };
 
    // Get a key for a new Post.
@@ -22,7 +21,7 @@ const add = (values, dispatch) => {
    // Write the new post's data simultaneously in the posts list and the user's post list.
    var updates = {};
    updates['/appointments/' + newKey] = appointment;
-   updates['/user-appointments/' + uid + '/' + newKey] = appointment;
+   updates['/user-appointments/' + appointment.userId + '/' + newKey] = appointment;
 
    return firebase.database().ref().update(updates);
 
@@ -31,13 +30,14 @@ const add = (values, dispatch) => {
 class AppointmentForm extends Component {
   render() {
 
-    const {fields: { name, mobile, clinic, date, time }, handleSubmit, submitting } = this.props;
+    const {fields: { name, mobile, clinic, date, time, userId }, handleSubmit, submitting } = this.props;
 
     return (
       <form onSubmit={handleSubmit(add)}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input type="text" className="form-control" id="name" placeholder="name" {...name} />
+          <input type="hidden" {...userId} />
         </div>
         <div className="form-group">
           <label htmlFor="mobile">Mobile</label>
@@ -80,5 +80,10 @@ export default reduxForm({
     form: 'AppointmentForm',
     fields
   },
-  state => ({ initialValues: { clinic: 'Equilibrium' } })
+  state => ({ // mapStateToProps
+    initialValues: {
+      clinic: 'Equilibrium',
+      userId: state.userId
+    }
+  })
 )(AppointmentForm);
