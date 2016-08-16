@@ -20,8 +20,9 @@ const add = (values, dispatch) => {
 
    // Write the new post's data simultaneously in the posts list and the user's post list.
    var updates = {};
-   updates['/appointments/' + newKey] = appointment;
-   updates['/user-appointments/' + appointment.userId + '/' + newKey] = appointment;
+  //  updates['/appointments/' + newKey] = appointment;
+   updates['/user-appointments/' + appointment.userId + '/' + newKey]
+      = appointment;
 
    return firebase.database().ref().update(updates);
 
