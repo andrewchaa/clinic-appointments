@@ -9,18 +9,18 @@ class App extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged(this.props.onAuthStateChanged);
 
-    var commentsRef = firebase.database().ref('post-comments/' + postId);
-    commentsRef.on('child_added', function(data) {
-      addCommentElement(postElement, data.key, data.val().text, data.val().author);
+    var appointmentsRef = firebase.database().ref('user-appointments/' + this.props.userId);
+    appointmentsRef.on('child_added', function(data) {
+      // addCommentElement(postElement, data.key, data.val().text, data.val().author);
     });
 
-    commentsRef.on('child_changed', function(data) {
-      setCommentValues(postElement, data.key, data.val().text, data.val().author);
-    });
-
-    commentsRef.on('child_removed', function(data) {
-      deleteComment(postElement, data.key);
-    });
+    // appointmentsRef.on('child_changed', function(data) {
+    //   setCommentValues(postElement, data.key, data.val().text, data.val().author);
+    // });
+    //
+    // appointmentsRef.on('child_removed', function(data) {
+    //   deleteComment(postElement, data.key);
+    // });
   }
 
   render() {
@@ -28,7 +28,7 @@ class App extends Component {
     return (
       <div>
         <SignIn {...this.props} /><br />
-        <List />
+        <List {...this.props} />
         <EntryForm {...this.props} />
 
       </div>
@@ -38,7 +38,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.userId
+    userId: state.userId,
+    appointments: state.appointments
   };
 }
 
@@ -60,6 +61,9 @@ const mapDispatchToProps = function(dispatch) {
         type: 'User_Id_Changed',
         userId: user.uid
       });
+    },
+    populateList() {
+      console.log('populate');
     }
   }
 }

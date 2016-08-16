@@ -6,12 +6,14 @@ import createLogger from 'redux-logger'
 
 import { reducer as formReducer } from 'redux-form';
 import userId from './reducers/userIdReducer';
+import appointmentsReducer from './reducers/appointmentsReducer';
 import App from './App';
 import './index.css';
 
 var rootReducer = combineReducers({
   form: formReducer,
-  userId
+  userId,
+  appointments: appointmentsReducer
 });
 
 const loggerMiddleware = createLogger();
