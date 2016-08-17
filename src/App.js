@@ -10,9 +10,7 @@ class App extends Component {
     firebase.auth().onAuthStateChanged(this.props.onAuthStateChanged);
 
     var appointmentsRef = firebase.database().ref('user-appointments/' + this.props.userId);
-    appointmentsRef.on('child_added', function(data) {
-      // addCommentElement(postElement, data.key, data.val().text, data.val().author);
-    });
+    appointmentsRef.on('child_added', this.props.populateList);
 
     // appointmentsRef.on('child_changed', function(data) {
     //   setCommentValues(postElement, data.key, data.val().text, data.val().author);
@@ -62,8 +60,18 @@ const mapDispatchToProps = function(dispatch) {
         userId: user.uid
       });
     },
-    populateList() {
-      console.log('populate');
+    populateList(data) {
+      data.forEach(function(ap) {
+        console.log(ap.key);
+        console.log(ap.val());
+        dispatch({
+          type: 'appointment-added',
+          appointment: ap.val()
+        });
+      })
+      window.data = data;
+
+      // addCommentElement(postElement, data.key, data.val().text, data.val().author);
     }
   }
 }
