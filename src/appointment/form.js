@@ -1,10 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import { reduxForm } from 'redux-form';
+// import DatePicker from './datePicker';
 import moment from 'moment';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-// import $ from 'jquery';
-// import 'bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'
+// import DatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
 
 const fields = [ 'name', 'mobile', 'clinic', 'date', 'time', 'userId' ];
 
@@ -29,9 +28,6 @@ const add = (values, dispatch) => {
 };
 
 class EntryForm extends Component {
-  handleChange() {
-    console.log('onChange')
-  }
 
   render() {
 
@@ -58,13 +54,7 @@ class EntryForm extends Component {
         </div>
         <div className="form-group">
           <label htmlFor="date">Date</label><br />
-          <DatePicker
-            {...date}
-            className="form-control"
-            dateFormat="DD/MM/YYYY"
-            // selected={this.props.date}
-            // onChange={(this.handleChange)}
-             />
+          // <DatePicker />
         </div>
         <div className="form-group">
           <label htmlFor="time">Time</label>
@@ -95,7 +85,7 @@ export default reduxForm({
     initialValues: {
       clinic: 'Equilibrium',
       userId: state.userId,
-      date: moment().calendar()
+      date: moment().format('L')
     }
   })
 )(EntryForm);
