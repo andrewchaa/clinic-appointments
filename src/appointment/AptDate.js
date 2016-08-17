@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-var Example = React.createClass({
+const AptDate = React.createClass({
   displayName: 'Example',
 
   getInitialState: function() {
@@ -20,14 +20,14 @@ var Example = React.createClass({
   },
 
   render: function() {
-    return <DatePicker
-            className="form-control"
-            dateFormat="DD/MM/YYYY"
-    // selected={this.props.fields.date.value ? moment(this.props.fields.date.value) : moment()}
-    // // selected={moment()}
-    // onChange={() => console.log(this.props.fields.date.value)}
-
+    return (
+      <DatePicker
+        className="form-control"
+        dateFormat="DD/MM/YYYY"
         selected={this.state.startDate}
-        onChange={this.handleChange} />;
+        onChange={this.handleChange} />
+    )
   }
 });
+
+export default AptDate;
