@@ -9,7 +9,7 @@ import userId from './reducers/userIdReducer';
 import appointmentsReducer from './reducers/appointmentsReducer';
 import App from './App';
 import './index.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 var rootReducer = combineReducers({
   form: formReducer,

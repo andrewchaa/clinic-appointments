@@ -1,11 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 import { reduxForm } from 'redux-form';
+import $ from 'jquery';
+import 'bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'
 
 const fields = [ 'name', 'mobile', 'clinic', 'date', 'time', 'userId' ];
 
 const add = (values, dispatch) => {
-  console.log(values);
-
   var appointment = {
      name: values.name,
      mobile: values.mobile,
@@ -15,10 +15,7 @@ const add = (values, dispatch) => {
      userId: values.userId
   };
 
-   // Get a key for a new Post.
    var newKey = firebase.database().ref().child('appointments').push().key;
-
-   // Write the new post's data simultaneously in the posts list and the user's post list.
    var updates = {};
   //  updates['/appointments/' + newKey] = appointment;
    updates['/user-appointments/' + appointment.userId + '/' + newKey]
@@ -29,6 +26,12 @@ const add = (values, dispatch) => {
 };
 
 class EntryForm extends Component {
+  componentDidMount() {
+    $(function () {
+      $('#date').datepicker();
+    });
+  }
+
   render() {
 
     const {fields: { name, mobile, clinic, date, time, userId }, handleSubmit, submitting } = this.props;
