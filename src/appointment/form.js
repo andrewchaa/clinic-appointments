@@ -31,7 +31,9 @@ class EntryForm extends Component {
   render() {
 
     const {fields: { name, mobile, clinic, date, time, userId }, handleSubmit, submitting } = this.props;
-    const selectedDate = this.props.fields.date.value ? moment(this.props.fields.date.value) : null;
+    const selectedDate = this.props.fields.date.value ?
+            moment(this.props.fields.date.value, 'DD/MM/YYYY') :
+            moment();
 
     return (
       <form onSubmit={handleSubmit(add)}>
