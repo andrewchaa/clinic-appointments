@@ -19,7 +19,6 @@ const add = (values, dispatch) => {
 
    var newKey = firebase.database().ref().child('appointments').push().key;
    var updates = {};
-  //  updates['/appointments/' + newKey] = appointment;
    updates['/user-appointments/' + appointment.userId + '/' + newKey]
       = appointment;
 
@@ -66,8 +65,8 @@ class EntryForm extends Component {
         </div>
         <div className="form-group">
           <label htmlFor="hour">Hour</label>
-          <select className="form-control" id="hour" {...hour}>
-            value={hour.value || ''}
+          <select className="form-control" id="hour" {...hour} value={hour.value || ''}>
+
             <option>7</option>
             <option>8</option>
             <option>9</option>
@@ -77,17 +76,21 @@ class EntryForm extends Component {
             <option>13</option>
             <option>14</option>
             <option>15</option>
-            <option>4 pm</option>
-            <option>5 pm</option>
-            <option>6 pm</option>
-            <option>7 pm</option>
-            <option>8 pm</option>
+            <option>16</option>
+            <option>17</option>
+            <option>18</option>
+            <option>19</option>
+            <option>20</option>
           </select>
-          <input type="text" className="form-control" id="hour" name="hour" {...hour} />
         </div>
         <div className="form-group">
           <label htmlFor="minute">Minute</label>
-          <input type="text" className="form-control" id="minute" name="minute" {...minute} />
+          <select className="form-control" id="minute" {...minute} value={minute.value}>
+            <option>0</option>
+            <option>15</option>
+            <option>30</option>
+            <option>45</option>
+          </select>
         </div>
 
         <button type="submit" disabled={submitting} className="btn btn-default">

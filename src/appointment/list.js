@@ -15,7 +15,8 @@ const List = (props) => {
                 <td>{app.mobile}</td>
                 <td>{app.clinic}</td>
                 <td>{app.date}</td>
-                <td>{app.time}</td>
+                <td>{app.house}</td>
+                <td>{app.minute}</td>
               </tr>
           )
         }

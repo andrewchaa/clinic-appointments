@@ -12,9 +12,13 @@ class App extends Component {
     var appointmentsRef = firebase.database().ref('user-appointments/' + this.props.userId);
     appointmentsRef.on('child_added', this.props.populateList);
 
-    // appointmentsRef.on('child_changed', function(data) {
-    //   setCommentValues(postElement, data.key, data.val().text, data.val().author);
-    // });
+    appointmentsRef.on('child_changed', function(data) {
+      data.forEach(function(ap) {
+        console.log('changed ' + ap.key);
+        console.log(ap.val());
+      })
+
+    });
     //
     // appointmentsRef.on('child_removed', function(data) {
     //   deleteComment(postElement, data.key);
@@ -62,7 +66,7 @@ const mapDispatchToProps = function(dispatch) {
     },
     populateList(data) {
       data.forEach(function(ap) {
-        console.log(ap.key);
+        console.log('added ' + ap.key);
         console.log(ap.val());
         dispatch({
           type: 'appointment-added',
