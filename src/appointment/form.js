@@ -6,6 +6,16 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const fields = [ 'name', 'mobile', 'clinic', 'date', 'hour', 'minute', 'userId' ];
 
+const validate = (values) => {
+  const errors = {};
+
+  if (!values.name) errors.name = 'Required';
+  if (!values.mobile) errors.mobile = 'Required';
+
+  console.log(values);
+  return errors;
+}
+
 const add = (values, dispatch) => {
   var appointment = {
      name: values.name,
@@ -36,12 +46,15 @@ class EntryForm extends Component {
       <form onSubmit={handleSubmit(add)}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
+
           <input type="text" className="form-control" id="name" placeholder="name" {...name} />
           <input type="hidden" {...userId} />
+          { name.touched && name.error && <div style={{color: 'red'}}>{name.error}</div> }
         </div>
         <div className="form-group">
           <label htmlFor="mobile">Mobile</label>
           <input type="text" className="form-control" id="mobile" placeholder="mobile" {...mobile} />
+          { mobile.touched && mobile.error && <div style={{color: 'red'}}>{mobile.error}</div> }
         </div>
         <div className="form-group">
           <label htmlFor="clinic">Clinic</label>
@@ -107,7 +120,8 @@ EntryForm.propTypes = {
 
 export default reduxForm({
     form: 'EntryForm',
-    fields
+    fields,
+    validate
   },
   state => ({ // mapStateToProps
     initialValues: {

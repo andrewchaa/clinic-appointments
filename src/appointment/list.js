@@ -27,8 +27,6 @@ const List = (props) => {
         }
         </tbody>
       </table>
-
-      list
     </div>
   )
 }
