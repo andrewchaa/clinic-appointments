@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { reduxForm, reset } from 'redux-form';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -19,7 +19,8 @@ const add = (values, dispatch) => {
 
   var path = '/appointments/' + values.userId + '/';
   var newAppointmentRef = firebase.database().ref(path).push(appointment);
-  
+
+  dispatch(reset('EntryForm'));
 };
 
 class EntryForm extends Component {
