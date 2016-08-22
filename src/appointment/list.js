@@ -21,12 +21,20 @@ const List = (props) => {
                       style={{color: 'lightgrey', cursor: 'pointer' }}
                       className="glyphicon glyphicon-remove"
                       onClick={() => props.deleteAppointment(props.userId, app.key)}
-                      ></span></td>
+                      ></span>
+                </td>
               </tr>
           )
         }
         </tbody>
       </table>
+      <button onClick={() => {
+          var ref = firebase.database().ref('appointments/' + props.userId);
+          ref.orderByChild('date').equalTo('21/08/2016').on('child_added', function(snapshot) {
+            console.log(snapshot.key);
+          });
+        }}>list
+      </button>
     </div>
   )
 }
