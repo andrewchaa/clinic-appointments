@@ -68,9 +68,11 @@ const mapDispatchToProps = function(dispatch) {
       data.forEach(function(ap) {
         console.log('added ' + ap.key);
         console.log(ap.val());
+        var appointment = ap.val();
+        appointment.key = ap.key;
         dispatch({
           type: 'appointment-added',
-          appointment: ap.val()
+          appointment: appointment
         });
       })
       window.data = data;

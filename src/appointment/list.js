@@ -10,7 +10,7 @@ const List = (props) => {
         {
           appointments.map(
             app =>
-              <tr>
+              <tr key={app.key}>
                 <td>{app.name}</td>
                 <td>{app.mobile}</td>
                 <td>{app.clinic}</td>

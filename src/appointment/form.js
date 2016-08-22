@@ -67,7 +67,6 @@ class EntryForm extends Component {
         <div className="form-group">
           <label htmlFor="hour">Hour</label>
           <select className="form-control" id="hour" {...hour} value={hour.value || ''}>
-
             <option>7</option>
             <option>8</option>
             <option>9</option>
@@ -117,7 +116,10 @@ export default reduxForm({
   state => ({ // mapStateToProps
     initialValues: {
       clinic: 'Equilibrium',
-      userId: state.userId
+      userId: state.userId,
+      date: moment().format('DD/MM/YYYY'),
+      hour: 9,
+      minute: 0
     }
   }),
   {
