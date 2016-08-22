@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import createLogger from 'redux-logger'
-
 import { reducer as formReducer } from 'redux-form';
+import { Router, Route, browserHistory } from 'react-router';
+
 import userId from './reducers/userIdReducer';
 import appointmentsReducer from './reducers/appointmentsReducer';
 import App from './App';
@@ -25,7 +26,9 @@ let store = createStore(rootReducer, {},
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router history={browserHistory}>
+      <Route path="/" component={App} />
+    </Router>
   </Provider>,
   document.getElementById('root')
 );
