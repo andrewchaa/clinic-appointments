@@ -17,12 +17,13 @@ const add = (values, dispatch) => {
      userId: values.userId
   };
 
-   var newKey = firebase.database().ref().child('appointments').push().key;
-   var updates = {};
-   updates['/user-appointments/' + appointment.userId + '/' + newKey]
-      = appointment;
+  var path = '/appointments/' + values.userId + '/';
+  var newKey = firebase.database().ref().child(path).push().key;
 
-   return firebase.database().ref().update(updates);
+  var updates = {};
+  updates[path + newKey] = appointment;
+
+  return firebase.database().ref().update(updates);
 
 };
 

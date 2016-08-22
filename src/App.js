@@ -9,7 +9,7 @@ class App extends Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged(this.props.onAuthStateChanged);
 
-    var appointmentsRef = firebase.database().ref('user-appointments/' + this.props.userId);
+    var appointmentsRef = firebase.database().ref('appointments/' + this.props.userId);
     appointmentsRef.on('child_added', this.props.populateList);
 
     appointmentsRef.on('child_changed', function(data) {
