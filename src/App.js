@@ -78,6 +78,10 @@ const mapDispatchToProps = function(dispatch) {
       })
 
       dispatch({ type: 'appointment-changed', appointments})
+    },
+    deleteAppointment(userId, key) {
+      var ref = firebase.database().ref('appointments/' + userId + '/' + key)
+      ref.remove();
     }
   }
 }

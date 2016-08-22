@@ -11,12 +11,17 @@ const List = (props) => {
           appointments.map(
             app =>
               <tr key={app.key}>
-                <td>{app.name}</td>
-                <td>{app.mobile}</td>
+                <td>
+                  {app.name} <span style={{color: 'lightgrey'}}>({app.mobile})</span>
+                </td>
                 <td>{app.clinic}</td>
                 <td>{app.date}</td>
-                <td>{app.house}</td>
-                <td>{app.minute}</td>
+                <td>{app.hour}:{app.minute}</td>
+                <td><span
+                      style={{color: 'lightgrey', cursor: 'pointer' }}
+                      className="glyphicon glyphicon-remove"
+                      onClick={() => props.deleteAppointment(props.userId, app.key)}
+                      ></span></td>
               </tr>
           )
         }
