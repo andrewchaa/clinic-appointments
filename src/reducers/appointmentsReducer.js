@@ -5,7 +5,8 @@ export default (state=[], action) => {
         ...state,
         action.appointment
       ];
-      break;
+    case 'appointment-changed':
+      return action.appointments;
     default:
       return state;
 

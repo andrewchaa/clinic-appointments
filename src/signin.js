@@ -17,4 +17,10 @@ const SignIn = (props) => {
   )
 }
 
+SignIn.propTypes = {
+  userId: PropTypes.string,
+  signIn: PropTypes.func,
+  signOut: PropTypes.func
+}
+
 export default SignIn;

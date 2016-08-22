@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EntryForm from './appointment/form';
 import SignIn from './signin';
@@ -11,14 +11,8 @@ class App extends Component {
 
     var appointmentsRef = firebase.database().ref('appointments/' + this.props.userId);
     appointmentsRef.on('child_added', this.props.populateList);
+    appointmentsRef.on('child_changed', this.props.updateList);
 
-    appointmentsRef.on('child_changed', function(data) {
-      data.forEach(function(ap) {
-        console.log('changed ' + ap.key);
-        console.log(ap.val());
-      })
-
-    });
     //
     // appointmentsRef.on('child_removed', function(data) {
     //   deleteComment(postElement, data.key);
@@ -66,8 +60,6 @@ const mapDispatchToProps = function(dispatch) {
     },
     populateList(data) {
       data.forEach(function(ap) {
-        console.log('added ' + ap.key);
-        console.log(ap.val());
         var appointment = ap.val();
         appointment.key = ap.key;
         dispatch({
@@ -76,8 +68,16 @@ const mapDispatchToProps = function(dispatch) {
         });
       })
       window.data = data;
+    },
+    updateList(data) {
+      var appointments = [];
+      data.forEach(function(ap) {
+        var appointment = ap.val();
+        appointment.key = ap.key;
+        appointments.push(appointment);
+      })
 
-      // addCommentElement(postElement, data.key, data.val().text, data.val().author);
+      dispatch({ type: 'appointment-changed', appointments})
     }
   }
 }

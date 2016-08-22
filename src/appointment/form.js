@@ -18,13 +18,8 @@ const add = (values, dispatch) => {
   };
 
   var path = '/appointments/' + values.userId + '/';
-  var newKey = firebase.database().ref().child(path).push().key;
-
-  var updates = {};
-  updates[path + newKey] = appointment;
-
-  return firebase.database().ref().update(updates);
-
+  var newAppointmentRef = firebase.database().ref(path).push(appointment);
+  
 };
 
 class EntryForm extends Component {

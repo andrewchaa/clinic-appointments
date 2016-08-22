@@ -28,4 +28,8 @@ const List = (props) => {
   )
 }
 
+List.propTypes = {
+  appointments: PropTypes.array
+}
+
 export default List;

@@ -1,6 +1,6 @@
-import React, { PropTypes, Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { connect, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import createLogger from 'redux-logger'
 
