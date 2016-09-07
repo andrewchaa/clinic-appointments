@@ -9,6 +9,7 @@
     "bootstrap": "^3.3.7",
     "bootstrap-datepicker": "^1.6.4",
     "express": "^4.13.4",
+    "firebase": "^3.3.0",
     "react": "^15.2.1",
     "react-datepicker": "^0.29.0",
     "react-dom": "^15.2.1",
