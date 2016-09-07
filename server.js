@@ -23,19 +23,25 @@ app.get('/', function (req, res) {
 
 app.get('/check-appointments', function (req, res) {
 
-  firebase.auth.Auth.signInWithEmailAndPassword("andrew.chaa@yahoo.co.uk", "")
-    .then(function (error, result) {
+  firebase.auth().signInWithEmailAndPassword("andrew.chaa@yahoo.co.uk", "")
+    .then(function (result, error) {
       if (error) {
-        console.log("Login Failed!", error);
+        console.log("Login Failed!");
+        console.log(error);
       } else {
-        console.log("Authenticated successfully with payload:", authData);
+        var userId = 'HeFltOAjsgRrXFYZB3g2Ref33oN2';
+
+        var ref = firebase.database().ref('appointments/' + userId);
+        ref.orderByChild('date').equalTo('21/08/2016').on('child_added', function(snapshot) {
+          console.log(snapshot.key);
+          snapshot.forEach(function (data) {
+            console.log(data.key);
+          })
+        });
+
       }
     });
 
-  var userId = firebase.auth().currentUser.uid;
-  firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-    console.log(snapshot.val().username);
-  });
 
   // var ref = firebase.database().ref('appointments/' + props.userId);
   // ref.orderByChild('date').equalTo('21/08/2016').on('child_added', function(snapshot) {
