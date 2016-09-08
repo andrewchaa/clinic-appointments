@@ -35,7 +35,9 @@ app.get('/check-appointments', function (req, res) {
         ref.orderByChild('date').equalTo(tomorrow).once('value', function(snapshot) {
           var appointments = [];
           snapshot.forEach(function (data) {
-            appointments.push(data.val());
+            var appointment = data.val();
+            appointments.push(appointment);
+
           })
 
           res.send(appointments);
