@@ -17,7 +17,8 @@
     "react-router": "^2.7.0",
     "redux": "^3.5.2",
     "redux-form": "^5.3.2",
-    "redux-logger": "^2.6.1"
+    "redux-logger": "^2.6.1",
+    "twilio": "^2.10.0"
   },
   "scripts": {
     "start": "react-scripts start",
