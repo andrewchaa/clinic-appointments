@@ -3,17 +3,16 @@
 var express = require('express');
 var path = require('path');
 var firebase = require('firebase');
-var databaseURL = "https://appointments-9ce53.firebaseio.com";
+var config = require('./serverConfig.json');
 
 var app = express();
 
-var config = {
-    apiKey: "AIzaSyDljLinnIuEuSuJHJhfoqTglyp_UQH3Ofo",
-    authDomain: "appointments-9ce53.firebaseapp.com",
-    databaseURL: databaseURL,
-    storageBucket: "appointments-9ce53.appspot.com",
-  };
-firebase.initializeApp(config);
+firebase.initializeApp({
+  apiKey: config.apiKey,
+  authDomain: config.authDomain,
+  databaseURL: config.databaseURL,
+  storageBucket: config.storageBucket
+});
 
 app.use(express.static(path.resolve(path.join(__dirname, '/app'))));
 
@@ -23,19 +22,17 @@ app.get('/', function (req, res) {
 
 app.get('/check-appointments', function (req, res) {
 
-  firebase.auth().signInWithEmailAndPassword("andrew.chaa@yahoo.co.uk", "")
+  firebase.auth().signInWithEmailAndPassword(config.logInEmail, config.logInPassword)
     .then(function (result, error) {
       if (error) {
-        console.log("Login Failed!");
-        console.log(error);
+        console.log("Login Failed: " + error);
       } else {
         var userId = 'HeFltOAjsgRrXFYZB3g2Ref33oN2';
-
         var ref = firebase.database().ref('appointments/' + userId);
-        ref.orderByChild('date').equalTo('21/08/2016').on('child_added', function(snapshot) {
+        ref.orderByChild('date').equalTo('07/09/2016').once('value', function(snapshot) {
           console.log(snapshot.key);
           snapshot.forEach(function (data) {
-            console.log(data.key);
+            console.log(data.val());
           })
         });
 
