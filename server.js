@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var firebase = require('firebase');
 var config = require('./serverConfig.json');
+var moment = require('moment');
 
 var app = express();
 
@@ -22,6 +23,8 @@ app.get('/', function (req, res) {
 
 app.get('/check-appointments', function (req, res) {
 
+  var tomorrow = moment().add(1, 'days').format('DD/MM/YYYY');
+  console.log(tomorrow);
   firebase.auth().signInWithEmailAndPassword(config.logInEmail, config.logInPassword)
     .then(function (result, error) {
       if (error) {
@@ -29,24 +32,16 @@ app.get('/check-appointments', function (req, res) {
       } else {
         var userId = 'HeFltOAjsgRrXFYZB3g2Ref33oN2';
         var ref = firebase.database().ref('appointments/' + userId);
-        ref.orderByChild('date').equalTo('07/09/2016').once('value', function(snapshot) {
-          console.log(snapshot.key);
+        ref.orderByChild('date').equalTo(tomorrow).once('value', function(snapshot) {
+          var appointments = [];
           snapshot.forEach(function (data) {
-            console.log(data.val());
+            appointments.push(data.val());
           })
-        });
 
+          res.send(appointments);
+        });
       }
     });
-
-
-  // var ref = firebase.database().ref('appointments/' + props.userId);
-  // ref.orderByChild('date').equalTo('21/08/2016').on('child_added', function(snapshot) {
-  //   console.log(snapshot.key);
-  // });
-
-
-  res.send('hello');
 });
 
 var server = app.listen(process.env.PORT || 8080, function () {
