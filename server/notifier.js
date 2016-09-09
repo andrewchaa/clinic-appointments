@@ -5,7 +5,7 @@ exports.send = (appointment) => {
   console.log(appointment);
 
   client.sendMessage({
-    to:'+447590536154',
+    to: appointment.mobile,
     from: '+441274451343',
     body: 'Hi ' + appointment.name  + '\r\n' +
       'You have an appointment with Hye-Eun at ' + appointment.clinic +
