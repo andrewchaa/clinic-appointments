@@ -5,6 +5,7 @@ var path = require('path');
 var firebase = require('firebase');
 var config = require('./serverConfig.json');
 var moment = require('moment');
+var notifier = require('./server/notifier');
 
 var app = express();
 
@@ -24,7 +25,6 @@ app.get('/', function (req, res) {
 app.get('/check-appointments', function (req, res) {
 
   var tomorrow = moment().add(1, 'days').format('DD/MM/YYYY');
-  console.log(tomorrow);
   firebase.auth().signInWithEmailAndPassword(config.logInEmail, config.logInPassword)
     .then(function (result, error) {
       if (error) {
@@ -36,8 +36,8 @@ app.get('/check-appointments', function (req, res) {
           var appointments = [];
           snapshot.forEach(function (data) {
             var appointment = data.val();
+            notifier.send(appointment);
             appointments.push(appointment);
-
           })
 
           res.send(appointments);

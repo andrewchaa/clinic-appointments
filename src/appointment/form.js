@@ -95,10 +95,10 @@ class EntryForm extends Component {
         <div className="form-group">
           <label htmlFor="minute">Minute</label>
           <select className="form-control" id="minute" {...minute} value={minute.value}>
-            <option>0</option>
-            <option>15</option>
-            <option>30</option>
-            <option>45</option>
+            <option value="00">0</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
           </select>
         </div>
 
