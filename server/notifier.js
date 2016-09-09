@@ -1,5 +1,9 @@
-var config = require('../serverConfig.json');
-var client = require('twilio')(config.twilioSid, config.twilioToken);
+if (!process.env.production) {
+  console.log('local environment, loading config settings');
+  require('../config').load();
+}
+
+var client = require('twilio')(process.env.twilioSid, process.env.twilioToken);
 
 exports.send = (appointment) => {
   console.log(appointment);

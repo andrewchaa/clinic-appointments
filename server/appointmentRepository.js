@@ -1,16 +1,20 @@
-var config = require('../serverConfig.json');
+if (!process.env.production) {
+  console.log('local environment, loading config settings');
+  require('../config').load();
+}
+
 var firebase = require('firebase');
 
 firebase.initializeApp({
-  apiKey: config.apiKey,
-  authDomain: config.authDomain,
-  databaseURL: config.databaseURL,
-  storageBucket: config.storageBucket
+  apiKey: process.env.apiKey,
+  authDomain: process.env.authDomain,
+  databaseURL: process.env.databaseURL,
+  storageBucket: process.env.storageBucket
 });
 
 exports.list = (date, next) => {
 
-  firebase.auth().signInWithEmailAndPassword(config.logInEmail, config.logInPassword)
+  firebase.auth().signInWithEmailAndPassword(process.env.logInEmail, process.env.logInPassword)
     .then(function (result, error) {
       if (error) {
         console.log("Login Failed: " + error);

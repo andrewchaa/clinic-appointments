@@ -2,7 +2,6 @@
 
 var express = require('express');
 var path = require('path');
-var config = require('./serverConfig.json');
 var moment = require('moment');
 var notifier = require('./server/notifier');
 var repository = require('./server/appointmentRepository');
