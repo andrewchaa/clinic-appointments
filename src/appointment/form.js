@@ -95,7 +95,7 @@ class EntryForm extends Component {
         <div className="form-group">
           <label htmlFor="minute">Minute</label>
           <select className="form-control" id="minute" {...minute} value={minute.value}>
-            <option value="00">0</option>
+            <option value="00">00</option>
             <option value="15">15</option>
             <option value="30">30</option>
             <option value="45">45</option>
@@ -129,7 +129,7 @@ export default reduxForm({
       userId: state.userId,
       date: moment().format('DD/MM/YYYY'),
       hour: 9,
-      minute: 0
+      minute: '00'
     }
   }),
   {
