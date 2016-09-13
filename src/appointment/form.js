@@ -18,8 +18,8 @@ const validate = (values) => {
 
 const add = (values, dispatch) => {
   var appointment = {
-     name: values.name,
-     mobile: values.mobile,
+     name: values.name.trim(),
+     mobile: values.mobile.trim(),
      clinic: values.clinic,
      date: values.date,
      hour: values.hour,
