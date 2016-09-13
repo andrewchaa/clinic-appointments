@@ -125,7 +125,7 @@ export default reduxForm({
   },
   state => ({ // mapStateToProps
     initialValues: {
-      clinic: 'Equilibrium',
+      clinic: 'Harley Street',
       userId: state.userId,
       date: moment().format('DD/MM/YYYY'),
       hour: 9,
