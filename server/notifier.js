@@ -15,7 +15,7 @@ exports.send = (appointment) => {
   client.sendMessage({
     to: appointment.mobile,
     from: process.env.twilioFromNumber,
-    body: `Hi ${appointment.name}\r\n` +
+    body: `Hi ${appointment.name}\r\n\r\n` +
           `This is a reminder for your acupuncture appointment with Hye-Eun ` +
           `at ${appointment.clinic} tomorrow, ` +
           `${appointment.date} ${appointment.hour}:${appointment.minute}\r\n` +
@@ -28,7 +28,7 @@ exports.sendSummary = (appointments) => {
   console.log('sending summary');
 
   var message = 'Hi Hye-Eun\r\n' +
-    'We have sent notifications for tomorrow appointments to the the following patients\r\n';
+    'We have sent notifications for tomorrow appointments to the the following patients\r\n\r\n';
   appointments.map(function (appointment) {
     message += `${appointment.name}: ${appointment.clinic} ${appointment.hour}:${appointment.minute}\r\n`
   });
