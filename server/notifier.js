@@ -3,7 +3,11 @@ if (!process.env.production) {
   require('../config').load();
 }
 
-var client = require('twilio')(process.env.twilioSid, process.env.twilioToken);
+const client = require('twilio')(process.env.twilioSid, process.env.twilioToken);
+const responseHandler = function (err, response) {
+  if (err) console.log(err);
+  if (response) console.log(response);
+}
 
 exports.send = (appointment) => {
   console.log(`sending message to ${appointment.name}` );
@@ -17,10 +21,7 @@ exports.send = (appointment) => {
           `${appointment.date} ${appointment.hour}:${appointment.minute}\r\n` +
           `If you cannot make it, please let Hye-Eun know ASAP to rearrange it. ` +
           `We look forward to seeing you then.`
-  }, function (err, response){
-    if (err) console.log(err);
-    if (response) console.log(response);
-  });
+  }, responseHandler);
 }
 
 exports.sendSummary = (appointments) => {
@@ -33,12 +34,11 @@ exports.sendSummary = (appointments) => {
   });
 
   client.sendMessage({
-    to: process.env.summaryCcNumbers,
-    from: process.env.twilioFromNumber,
-    body: message
-  }, function (err, response) {
-    if (err) console.log(err);
-    if (response) console.log(response);
-  })
-
+    to: process.env.summaryCcNumbers, from: process.env.twilioFromNumber, body: message
+    }, responseHandler
+  );
+  client.sendMessage({
+    to: process.env.summaryToNumbers, from: process.env.twilioFromNumber, body: message
+    }, responseHandler
+  );
 }
