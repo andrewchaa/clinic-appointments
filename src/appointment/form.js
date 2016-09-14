@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { reduxForm, reset } from 'redux-form';
 import moment from 'moment';
+import phone from 'phone';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -19,7 +20,7 @@ const validate = (values) => {
 const add = (values, dispatch) => {
   var appointment = {
      name: values.name.trim(),
-     mobile: values.mobile.trim(),
+     mobile: phone(values.mobile.trim(), 'GB')[0],
      clinic: values.clinic,
      date: values.date,
      hour: values.hour,
