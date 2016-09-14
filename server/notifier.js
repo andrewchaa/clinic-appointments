@@ -6,7 +6,7 @@ if (!process.env.production) {
 var client = require('twilio')(process.env.twilioSid, process.env.twilioToken);
 
 exports.send = (appointment) => {
-  console.log(appointment);
+  console.log(`sending message to ${appointment.name}` );
 
   client.sendMessage({
     to: appointment.mobile,
@@ -17,24 +17,28 @@ exports.send = (appointment) => {
           `${appointment.date} ${appointment.hour}:${appointment.minute}\r\n` +
           `If you cannot make it, please let Hye-Eun know ASAP to rearrange it. ` +
           `We look forward to seeing you then.`
-  }, function (err, responseData){
-    if (err) {
-      console.log(err);
-    }
-
-    if (responseData) {
-      console.log(responseData);
-    }
+  }, function (err, response){
+    if (err) console.log(err);
+    if (response) console.log(response);
   });
-  // client.sendMessage({
-  //   to: appointment.mobile,
-  //   from: '+441274451343',
-  //   body: 'Hi ' + appointment.name  + '\r\n' +
-  //     'You have an appointment with Hye-Eun at ' + appointment.clinic +
-  //     ' tomorrow, ' + appointment.date + ' ' + appointment.hour + ':' + appointment.minute + '\r\n' +
-  //     'If you cannot make it, please call Hye-Eun and rearrange it.'
-  // }, function (err, responseData){
-  //   console.log(err);
-  // });
+}
+
+exports.sendSummary = (appointments) => {
+  console.log('sending summary');
+
+  var message = 'Hi Hye-Eun\r\n' +
+    'We have sent notifications for tomorrow appointments to the the following patients\r\n';
+  appointments.map(function (appointment) {
+    message += `${appointment.name}: ${appointment.clinic} ${appointment.hour}:${appointment.minute}\r\n`
+  });
+
+  client.sendMessage({
+    to: process.env.summaryCcNumbers,
+    from: process.env.twilioFromNumber,
+    body: message
+  }, function (err, response) {
+    if (err) console.log(err);
+    if (response) console.log(response);
+  })
 
 }

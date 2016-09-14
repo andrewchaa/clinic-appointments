@@ -23,6 +23,7 @@ app.get('/check-appointments', function (req, res) {
       notifier.send(appointment);
     })
 
+    notifier.sendSummary(appointments);
     res.send(appointments);
   });
 
