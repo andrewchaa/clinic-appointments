@@ -25,18 +25,24 @@ exports.send = (appointment) => {
 }
 
 exports.sendSummary = (appointments) => {
-  console.log('sending summary');
-
   var message = 'Hi Hye-Eun\r\n' +
     'We have sent notifications for tomorrow appointments to the the following patients\r\n\r\n';
   appointments.map(function (appointment) {
     message += `${appointment.name}: ${appointment.clinic} ${appointment.hour}:${appointment.minute}\r\n`
   });
 
+  if (appointments.length === 0) {
+    console.log('No appointments. Not sending any summary')
+    return;
+  }
+
+  console.log(`sending summary to ${process.env.summaryCcNumbers}`);
   client.sendMessage({
     to: process.env.summaryCcNumbers, from: process.env.twilioFromNumber, body: message
     }, responseHandler
   );
+
+  console.log(`sending summary to ${process.env.summaryToNumbers}`);
   client.sendMessage({
     to: process.env.summaryToNumbers, from: process.env.twilioFromNumber, body: message
     }, responseHandler
