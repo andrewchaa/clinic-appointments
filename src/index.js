@@ -9,8 +9,6 @@ import { Router, Route, browserHistory } from 'react-router';
 import userId from './reducers/userIdReducer';
 import appointmentsReducer from './reducers/appointmentsReducer';
 import App from './App';
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 var rootReducer = combineReducers({
   form: formReducer,

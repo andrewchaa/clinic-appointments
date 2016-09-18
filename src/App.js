@@ -13,10 +13,6 @@ class App extends Component {
     appointmentsRef.on('child_added', this.props.populateList);
     appointmentsRef.on('child_changed', this.props.updateList);
 
-    //
-    // appointmentsRef.on('child_removed', function(data) {
-    //   deleteComment(postElement, data.key);
-    // });
   }
 
   render() {
