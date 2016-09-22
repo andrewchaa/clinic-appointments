@@ -43,71 +43,94 @@ class EntryForm extends Component {
             moment(this.props.fields.date.value, 'DD/MM/YYYY') :
             moment();
 
+    const labelClass = 'col-sm-1 control-label';
+    const elementClass = 'col-sm-11';
+
     return (
-      <form onSubmit={handleSubmit(add)}>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
+      <div className="box box-info">
+        <div className="box-header with-border">
+          <h3 className="box-title">Register an appointment</h3>
+        </div>
+        <form className="form-horizontal" onSubmit={handleSubmit(add)}>
+        <div className="box-body">
+          <div className="form-group">
+            <label htmlFor="name" className={labelClass}>Name</label>
+            <div className={elementClass}>
+              <input type="text" className="form-control" id="name" placeholder="name" {...name} />
+              <input type="hidden" {...userId} />
+              { name.touched && name.error && <div style={{color: 'red'}}>{name.error}</div> }
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="mobile" className={labelClass}>Mobile</label>
+            <div className={elementClass}>
+              <input type="text" className="form-control" id="mobile" placeholder="mobile" {...mobile} />
+              { mobile.touched && mobile.error && <div style={{color: 'red'}}>{mobile.error}</div> }
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="clinic" className={labelClass}>Clinic</label>
+            <div className={elementClass}>
+              <select className="form-control" id="clinic" {...clinic}>
+                value={clinic.value || ''}
+                <option>Equilibrium</option>
+                <option>Harley Street</option>
+              </select>
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="date" className={labelClass}>Date</label><br />
+            <div className={elementClass}>
+              <DatePicker
+                {...date}
+                className="form-control"
+                dateFormat="DD/MM/YYYY"
+                selected={selectedDate}
+                />
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="hour" className={labelClass}>Hour</label>
+            <div className={elementClass}>
+              <select className="form-control" id="hour" {...hour} value={hour.value || ''}>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+              </select>
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="minute" className={labelClass}>Minute</label>
+            <div className={elementClass}>
+              <select className="form-control" id="minute" {...minute} value={minute.value}>
+                <option value="00">00</option>
+                <option value="15">15</option>
+                <option value="30">30</option>
+                <option value="45">45</option>
+              </select>
+            </div>
+          </div>
 
-          <input type="text" className="form-control" id="name" placeholder="name" {...name} />
-          <input type="hidden" {...userId} />
-          { name.touched && name.error && <div style={{color: 'red'}}>{name.error}</div> }
+          <div className="box-footer">
+            <button type="submit" disabled={submitting} className="btn btn-info">
+              {submitting ? <i className="glyphicon glyphicon-refresh" /> : <i />}
+              Submit
+            </button>
+          </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="mobile">Mobile</label>
-          <input type="text" className="form-control" id="mobile" placeholder="mobile" {...mobile} />
-          { mobile.touched && mobile.error && <div style={{color: 'red'}}>{mobile.error}</div> }
-        </div>
-        <div className="form-group">
-          <label htmlFor="clinic">Clinic</label>
-          <select className="form-control" id="clinic" {...clinic}>
-            value={clinic.value || ''}
-            <option>Equilibrium</option>
-            <option>Harley Street</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="date">Date</label><br />
-          <DatePicker
-            {...date}
-            className="form-control"
-            dateFormat="DD/MM/YYYY"
-            selected={selectedDate}
-            />
-        </div>
-        <div className="form-group">
-          <label htmlFor="hour">Hour</label>
-          <select className="form-control" id="hour" {...hour} value={hour.value || ''}>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-            <option>13</option>
-            <option>14</option>
-            <option>15</option>
-            <option>16</option>
-            <option>17</option>
-            <option>18</option>
-            <option>19</option>
-            <option>20</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="minute">Minute</label>
-          <select className="form-control" id="minute" {...minute} value={minute.value}>
-            <option value="00">00</option>
-            <option value="15">15</option>
-            <option value="30">30</option>
-            <option value="45">45</option>
-          </select>
-        </div>
-
-        <button type="submit" disabled={submitting} className="btn btn-default">
-          {submitting ? <i className="glyphicon glyphicon-refresh" /> : <i />}
-          Submit
-        </button>
       </form>
+      </div>
     );
   }
 }
