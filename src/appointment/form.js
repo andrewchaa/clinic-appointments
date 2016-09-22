@@ -13,7 +13,6 @@ const validate = (values) => {
   if (!values.name) errors.name = 'Required';
   if (!values.mobile) errors.mobile = 'Required';
 
-  console.log(values);
   return errors;
 }
 
@@ -147,17 +146,21 @@ export default reduxForm({
     fields,
     validate
   },
-  state => ({ // mapStateToProps
-    initialValues: {
-      clinic: 'Harley Street',
-      userId: state.userId,
-      date: moment().format('DD/MM/YYYY'),
-      hour: 9,
-      minute: '00'
-    }
-  }),
+  state => {
+    console.log(state);
+    console.log(state.form.EntryForm ? state.form.EntryForm.clinic.value : 'null');
+    const form = state.form.EntryForm;
+    return ({ // mapStateToProps
+      initialValues: {
+        clinic: form ? form.clinic.value : 'Harley Street',
+        userId: state.userId,
+        date: form ? form.date.value : moment().format('DD/MM/YYYY'),
+        hour: form ? form.hour.value: '9',
+        minute: form ? form.minute.value: '00'
+      }
+    })
+  },
   {
     // mapDispatchToProps
-
   }
 )(EntryForm);

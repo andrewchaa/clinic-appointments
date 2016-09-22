@@ -31,7 +31,7 @@ const List = (props) => {
                       <td>{app.hour}:{app.minute}</td>
                       <td><span
                             style={{color: 'lightgrey', cursor: 'pointer' }}
-                            classNameName="glyphicon glyphicon-remove"
+                            className="glyphicon glyphicon-remove"
                             onClick={() => props.deleteAppointment(props.userId, app.key)}
                             ></span>
                       </td>
