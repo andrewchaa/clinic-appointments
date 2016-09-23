@@ -19,7 +19,7 @@ exports.send = (appointment) => {
           `This is a reminder for your acupuncture appointment with Hye-Eun ` +
           `at ${appointment.clinic} tomorrow, ` +
           `${appointment.date} ${appointment.hour}:${appointment.minute}\r\n` +
-          `If you cannot make it, please let Hye-Eun know ASAP to rearrange it. ` +
+          `If you cannot make it, please let Hye-Eun (07733 367803) know ASAP to rearrange it. ` +
           `We look forward to seeing you then.`
   }, responseHandler);
 }

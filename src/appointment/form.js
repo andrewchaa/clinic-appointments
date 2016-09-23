@@ -147,8 +147,6 @@ export default reduxForm({
     validate
   },
   state => {
-    console.log(state);
-    console.log(state.form.EntryForm ? state.form.EntryForm.clinic.value : 'null');
     const form = state.form.EntryForm;
     return ({ // mapStateToProps
       initialValues: {
